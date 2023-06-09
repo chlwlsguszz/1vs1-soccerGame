@@ -30,7 +30,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = gameVersion;
 
         // 서버 접속
-        PhotonNetwork.ConnectUsingSettings();
+        if(!PhotonNetwork.IsConnected) 
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
 
     void Start()
