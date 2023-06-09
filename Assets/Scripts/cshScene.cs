@@ -11,4 +11,9 @@ public class cshScene : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene"); // 여기서 "GameScene"은 게임 씬의 이름입니다.
     }
+
+    public void LoadRoomScene() 
+    {
+        SceneManager.LoadScene("RoomScene");
+    }
 }

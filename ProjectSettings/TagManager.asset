@@ -8,6 +8,8 @@ TagManager:
   - goal
   - player2
   - goal2
+  - Bullet
+  - Ball
   layers:
   - Default
   - TransparentFX
