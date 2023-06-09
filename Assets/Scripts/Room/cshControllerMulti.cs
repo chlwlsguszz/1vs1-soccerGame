@@ -18,14 +18,29 @@ public class cshControllerMulti : MonoBehaviourPunCallbacks
 
     void Start() 
     {
-        if (PhotonNetwork.IsMasterClient)
+        if(PhotonNetwork.IsMasterClient)
         {
-            // the host.
+            if (pv.IsMine)
+            {
+                // the host.
+            }
+            else if(!pv.IsMine)
+            {
+                // the user.
+                this.GetComponent<Renderer>().material = blueMaterial;
+            }
         }
         else
         {
-            // This player is not the local player, so change its color to blue.
-            this.GetComponent<Renderer>().material = blueMaterial;
+            if (pv.IsMine)
+            {
+                // the user.
+                this.GetComponent<Renderer>().material = blueMaterial;
+            }
+            else if(!pv.IsMine)
+            {
+                // the host.
+            }
         }
     }
 
