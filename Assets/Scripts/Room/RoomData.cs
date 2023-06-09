@@ -10,7 +10,7 @@ public class RoomData : MonoBehaviour
     private TMP_Text RoomInfoText;
     private RoomInfo _roomInfo;
 
-    public TMP_InputField userIdText;
+    //public TMP_InputField userIdText;
 
     public RoomInfo RoomInfo
     {
@@ -31,7 +31,7 @@ public class RoomData : MonoBehaviour
     void Awake()
     {
         RoomInfoText = GetComponentInChildren<TMP_Text>();
-        userIdText = GameObject.Find("InputField (TMP) - Nickname").GetComponent<TMP_InputField>();
+       //userIdText = GameObject.Find("InputField (TMP) - Nickname").GetComponent<TMP_InputField>();
     }
 
     void OnEnterRoom(string roomName)
@@ -41,7 +41,7 @@ public class RoomData : MonoBehaviour
         ro.IsVisible = true;
         ro.MaxPlayers = 2;
 
-        PhotonNetwork.NickName = userIdText.text;
+        PhotonNetwork.NickName = "ArtSoccer"; // temp nickname
         PhotonNetwork.JoinOrCreateRoom(roomName, ro, TypedLobby.Default);
     }
 }

@@ -9,9 +9,9 @@ using TMPro;
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     private readonly string gameVersion = "v1.0";
-    private string userId = "Ojui";
+    private string userId = "ArtSoccer";
 
-    public TMP_InputField userIdText;
+    //public TMP_InputField userIdText;
     public TMP_InputField roomNameText;
 
     // 룸 목록 저장하기 위한 딕셔너리 자료형
@@ -37,7 +37,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("00. 포톤 매니저 시작");
         userId = PlayerPrefs.GetString("USER_ID", $"USER_{Random.Range(0, 100):00}");
-        userIdText.text = userId;
+        //userIdText.text = userId;
         PhotonNetwork.NickName = userId;
     }
     public override void OnConnectedToMaster()
@@ -54,21 +54,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("02. 로비에 접속");
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.Log("랜덤 룸 접속 실패");
+    // public override void OnJoinRandomFailed(short returnCode, string message)
+    // {
+    //     Debug.Log("랜덤 룸 접속 실패");
 
-        // 룸 속성 설정
-        RoomOptions ro = new RoomOptions();
-        ro.IsOpen = true;
-        ro.IsVisible = true;
-        ro.MaxPlayers = 2;
+    //     // 룸 속성 설정
+    //     RoomOptions ro = new RoomOptions();
+    //     ro.IsOpen = true;
+    //     ro.IsVisible = true;
+    //     ro.MaxPlayers = 2;
 
-        roomNameText.text = $"Room_{Random.Range(1, 100):000}";
+    //     roomNameText.text = $"Room_{Random.Range(1, 100):000}";
 
-        // 룸을 생성 &gt; 자동 입장됨
-        PhotonNetwork.CreateRoom("room_1", ro);
-    }
+    //     // 룸을 생성 &gt; 자동 입장됨
+    //     PhotonNetwork.CreateRoom("room_1", ro);
+    // }
 
     public override void OnCreatedRoom()
     {
@@ -80,7 +80,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("04. 방 입장 완료");
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LoadLevel("Level_1");
+            PhotonNetwork.LoadLevel("MultiPlayer");
         }
     }
 
@@ -119,20 +119,20 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     #region UI_BUTTON_CALLBACK
     // Random 버튼 클릭
-    public void OnRandomBtn()
-    {
-        // ID 인풋필드가 비어있으면
-        if (string.IsNullOrEmpty(userIdText.text))
-        {
-            // 랜덤 아이디 부여
-            userId = $"USER_{Random.Range(0, 100):00}";
-            userIdText.text = userId;
-        }
+    // public void OnRandomBtn()
+    // {
+    //     // ID 인풋필드가 비어있으면
+    //     if (string.IsNullOrEmpty(userIdText.text))
+    //     {
+    //         // 랜덤 아이디 부여
+    //         userId = $"USER_{Random.Range(0, 100):00}";
+    //         userIdText.text = userId;
+    //     }
 
-        PlayerPrefs.SetString("USER_ID", userIdText.text);
-        PhotonNetwork.NickName = userIdText.text;
-        PhotonNetwork.JoinRandomRoom();
-    }
+    //     PlayerPrefs.SetString("USER_ID", userIdText.text);
+    //     PhotonNetwork.NickName = userIdText.text;
+    //     PhotonNetwork.JoinRandomRoom();
+    // }
 
     // Room 버튼 클릭 시 (룸 생성)
     public void OnMakeRoomClick()
