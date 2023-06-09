@@ -12,8 +12,22 @@ public class cshControllerMulti : MonoBehaviourPunCallbacks
     public GameObject ball;
     public float shootingPower = 0.5f; // And this
     public float shootingDistance = 2f; // 슈팅 가능 거리
+    public Material blueMaterial;
 
     private PhotonView pv;
+
+    void Start() 
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            // the host.
+        }
+        else
+        {
+            // This player is not the local player, so change its color to blue.
+            this.GetComponent<Renderer>().material = blueMaterial;
+        }
+    }
 
     void Awake() 
     {
@@ -53,18 +67,30 @@ public class cshControllerMulti : MonoBehaviourPunCallbacks
     }
    void ShootBall()
     {
-        Rigidbody ballRb = ball.GetComponent<Rigidbody>();
-        if(ballRb != null)
-        {
-            Vector3 shootingDirection = transform.forward;
-            ballRb.AddForce(shootingDirection * shootingPower, ForceMode.Impulse);
-        }
+        // Rigidbody ballRb = ball.GetComponent<Rigidbody>();
+        // if(ballRb != null)
+        // {
+        //     Vector3 shootingDirection = transform.forward;
+        //     ballRb.AddForce(shootingDirection * shootingPower, ForceMode.Impulse);
+        // }
+        pv.RPC("ShootBallRPC", RpcTarget.All);
     }
 
     bool IsBallInRange()
     {
         float distance = Vector3.Distance(transform.position, ball.transform.position);
         return distance <= shootingDistance;
+    }
+
+    [PunRPC]
+    void ShootBallRPC()
+    {
+        Rigidbody ballRb = ball.GetComponent<Rigidbody>();
+        if(ballRb != null)
+        {
+            Vector3 shootingDirection = transform.forward;
+            ballRb.AddForce(shootingDirection * shootingPower, ForceMode.Impulse);
+        }
     }
 
 }

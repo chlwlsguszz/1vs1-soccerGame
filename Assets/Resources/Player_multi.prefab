@@ -125,6 +125,7 @@ MonoBehaviour:
   ball: {fileID: 5176927750601145031, guid: b420d669c84ca4e348fb22f14ac71ed8, type: 3}
   shootingPower: 0.5
   shootingDistance: 1.5
+  blueMaterial: {fileID: 2100000, guid: 3f82426c064eb4d5f9de147215d1ff8b, type: 2}
 --- !u!54 &269865093748659650
 Rigidbody:
   m_ObjectHideFlags: 0
