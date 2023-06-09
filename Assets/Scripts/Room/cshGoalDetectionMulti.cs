@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement; 
+using Photon.Pun;
 
 
-public class cshGoalDetection : MonoBehaviour
+public class cshGoalDetectionMulti : MonoBehaviourPun
 {
     private Vector3 initialPosition;
     private Rigidbody ballRb;   // add
@@ -24,6 +25,7 @@ public class cshGoalDetection : MonoBehaviour
         setYelloText();
     }
 
+    [PunRPC]
     public void GetRedScore(int mount)
     {
         redScore += mount;
@@ -35,6 +37,7 @@ public class cshGoalDetection : MonoBehaviour
 
     }
 
+    [PunRPC]
     public void GetYelloScore(int mount)
     {
         yellowScore += mount;
@@ -62,38 +65,53 @@ public class cshGoalDetection : MonoBehaviour
 
         // 1초 후에 Second 씬을 로드합니다.
         Invoke("LoadSecondScene", 1f);
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
     }
 
     private void LoadSecondScene()
     {
-        SceneManager.LoadScene("second");
+        if (GameManager.instance != null) 
+        {
+            Destroy(GameManager.instance.gameObject);
+            GameManager.instance = null;  // Remember to nullify the instance to avoid further access.
+        }
+        if (PhotonNetwork.IsConnected) // Check if still connected
+            {
+                PhotonNetwork.Disconnect(); // Force disconnect if still connected
+            }
+        SceneManager.LoadScene("second"); // 여기서 "GameScene"은 게임 씬의 이름입니다.
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject.tag == "goal")
+        if (PhotonNetwork.IsMasterClient) 
         {
-            Debug.Log("!! Red Team Goal !! !");
-           // transform.position = initialPosition; // 위치 초기화
-            ResetBall();
-            GetRedScore(1);
-            //transform.position = initialPosition; // 위치 초기화
+            if (collision.gameObject.tag == "goal")
+            {
+                Debug.Log("!! Red Team Goal !! !");
+            // transform.position = initialPosition; // 위치 초기화
+                ResetBall();
+                //GetRedScore(1);
+                photonView.RPC("GetRedScore", RpcTarget.AllBuffered, 1);
+                //transform.position = initialPosition; // 위치 초기화
 
-            // Instantiate(particlePrefab, transform.position, Quaternion.identity);
-            // Instantiate(particlePrefab2, transform.position, Quaternion.identity);
-        }
-        if (collision.gameObject.tag == "goal2")
-        {
-            Debug.Log("!! Yello Team Goal !! !");
-           // transform.position = initialPosition; // 위치 초기화
-            ResetBall();
-            GetYelloScore(1);
-            //transform.position = initialPosition; // 위치 초기화
+                // Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                // Instantiate(particlePrefab2, transform.position, Quaternion.identity);
+            }
+            if (collision.gameObject.tag == "goal2")
+            {
+                Debug.Log("!! Yello Team Goal !! !");
+            // transform.position = initialPosition; // 위치 초기화
+                ResetBall();
+                //GetYelloScore(1);
+                photonView.RPC("GetYelloScore", RpcTarget.AllBuffered, 1);
+                //transform.position = initialPosition; // 위치 초기화
 
-            // Instantiate(particlePrefab, transform.position, Quaternion.identity);
-            // Instantiate(particlePrefab2, transform.position, Quaternion.identity);
+                // Instantiate(particlePrefab, transform.position, Quaternion.identity);
+                // Instantiate(particlePrefab2, transform.position, Quaternion.identity);
+            }
         }
     }
     // add

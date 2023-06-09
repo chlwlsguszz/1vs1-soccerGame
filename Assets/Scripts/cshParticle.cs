@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class cshParticle : MonoBehaviourPun
+public class cshParticle : MonoBehaviour
 {
     public GameObject prefab;
     public GameObject prefab2;
-    public GameObject particleSpawnPoint; // 파티클 생성 위치
-    public GameObject particleSpawnPoint2; // 파티클 생성 위치
+     public GameObject particleSpawnPoint; // 파티클 생성 위치
+      public GameObject particleSpawnPoint2; // 파티클 생성 위치
 
 
     // Start is called before the first frame update
@@ -26,18 +25,15 @@ public class cshParticle : MonoBehaviourPun
     {
         if (collision.gameObject.tag == "goal")
         {
-            photonView.RPC("InstantiateParticles", RpcTarget.All, particleSpawnPoint2.transform.position, 1);
+                // 파티클 생성
+            Instantiate(prefab2, particleSpawnPoint2.transform.position, Quaternion.identity);
+            
         }
         else if (collision.gameObject.tag == "goal2")
         {
-            photonView.RPC("InstantiateParticles", RpcTarget.All, particleSpawnPoint.transform.position, 2);
+                // 파티클 생성
+            Instantiate(prefab, particleSpawnPoint.transform.position, Quaternion.identity);
+            
         }
-    }
-
-    [PunRPC]
-    void InstantiateParticles(Vector3 position, int type)
-    {
-        GameObject prefabToInstantiate = (type == 1) ? prefab : prefab2;
-        Instantiate(prefabToInstantiate, position, Quaternion.identity);
     }
 }

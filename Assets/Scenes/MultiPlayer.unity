@@ -2375,8 +2375,8 @@ GameObject:
   - component: {fileID: 1290419453}
   - component: {fileID: 1290419452}
   - component: {fileID: 1290419451}
-  - component: {fileID: 1290419450}
-  - component: {fileID: 1290419449}
+  - component: {fileID: 1290419459}
+  - component: {fileID: 1290419458}
   - component: {fileID: 1290419457}
   - component: {fileID: 1290419456}
   m_Layer: 0
@@ -2386,37 +2386,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1290419449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290419448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca2862733b2844e39018cee16914d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 8671206592495075884, guid: 0671ee65ea92b4b47ada7457f18edf98, type: 3}
-  prefab2: {fileID: 3640704676909034750, guid: d8dafcd490fda4d32962e5daf6e7fa9f, type: 3}
-  particleSpawnPoint: {fileID: 896534077}
-  particleSpawnPoint2: {fileID: 1117303193}
---- !u!114 &1290419450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290419448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3525f65a594e4d5b890a6ffd8f8cb16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ball: {fileID: 1290419448}
-  redscoreText: {fileID: 1531004867}
-  yelloscoreText: {fileID: 228915386}
 --- !u!54 &1290419451
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2550,6 +2519,37 @@ MonoBehaviour:
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1290419458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290419448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15a78112ab094ff48754af6602f6135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8671206592495075884, guid: 0671ee65ea92b4b47ada7457f18edf98, type: 3}
+  prefab2: {fileID: 3640704676909034750, guid: d8dafcd490fda4d32962e5daf6e7fa9f, type: 3}
+  particleSpawnPoint: {fileID: 896534077}
+  particleSpawnPoint2: {fileID: 1117303193}
+--- !u!114 &1290419459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290419448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e92438cb23e6442869ca972b4a121a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 1290419448}
+  redscoreText: {fileID: 1531004867}
+  yelloscoreText: {fileID: 228915386}
 --- !u!1 &1311307003
 GameObject:
   m_ObjectHideFlags: 0
