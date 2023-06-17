@@ -11,6 +11,8 @@ public class cshController2 : MonoBehaviour
 
    public bool CanMove { get; set; } = true;  // Add this line
 
+   public AudioSource shootingAudioSource;
+
     void Update()
     {
         if(CanMove)
@@ -45,6 +47,7 @@ public class cshController2 : MonoBehaviour
         Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         if(ballRb != null)
         {
+            shootingAudioSource.Play();
             Vector3 shootingDirection = transform.forward;
             ballRb.AddForce(shootingDirection * shootingPower, ForceMode.Impulse);
         }

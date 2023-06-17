@@ -21,6 +21,9 @@ public class cshGoalDetection : MonoBehaviour
     public GameObject player2;
     public GameObject spawnP1;
     public GameObject spawnP2;
+
+    public AudioSource whistleAudioSource;
+    public AudioSource goalAudioSource;
    
 
     private void Start()
@@ -31,6 +34,7 @@ public class cshGoalDetection : MonoBehaviour
         setYelloText();
         player1.GetComponent<cshController>().DisableMovementForSeconds(3.0f);
         player2.GetComponent<cshController2>().DisableMovementForSeconds(3.0f);
+        Invoke("WhistlePlay", 3f);
     }
 
     public void GetRedScore(int mount)
@@ -85,6 +89,7 @@ public class cshGoalDetection : MonoBehaviour
 
         if (collision.gameObject.tag == "goal")
         {
+            goalAudioSource.Play();
             Debug.Log("!! Red Team Goal !! !");
             // TODO : 화면에 띄우기.
             GetRedScore(1);
@@ -98,6 +103,7 @@ public class cshGoalDetection : MonoBehaviour
         }
         if (collision.gameObject.tag == "goal2")
         {
+            goalAudioSource.Play();
             Debug.Log("!! Yello Team Goal !! !");
             // TODO: 화면에 띄우기.
            // transform.position = initialPosition; // 위치 초기화
@@ -128,8 +134,14 @@ public class cshGoalDetection : MonoBehaviour
 
         player1.GetComponent<cshController>().DisableMovementForSeconds(3.0f);
         player2.GetComponent<cshController2>().DisableMovementForSeconds(3.0f);
+        Invoke("WhistlePlay", 3f);
 
         stopFlag = false;
+    }
+
+    private void WhistlePlay() 
+    {
+        whistleAudioSource.Play();
     }
     
 }
