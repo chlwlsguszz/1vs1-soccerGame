@@ -805,7 +805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 820, y: -300}
+  m_AnchoredPosition: {x: 950, y: -300}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &353526247
@@ -841,7 +841,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GAME INFO TEXT
+  m_Text: Game INFO TEXT
 --- !u!222 &353526248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4980,6 +4980,7 @@ MonoBehaviour:
   spawnP2: {fileID: 1044417251}
   whistleAudioSource: {fileID: 1216376074}
   goalAudioSource: {fileID: 66754808}
+  gameInfoText: {fileID: 353526247}
 --- !u!114 &1838993499
 MonoBehaviour:
   m_ObjectHideFlags: 0

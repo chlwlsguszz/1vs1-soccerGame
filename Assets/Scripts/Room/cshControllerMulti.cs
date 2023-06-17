@@ -16,6 +16,10 @@ public class cshControllerMulti : MonoBehaviourPunCallbacks
 
     private PhotonView pv;
 
+    public bool CanMove { get; set; } = true;  // Add this line
+
+    public AudioSource shootingAudioSource;
+
     void Start() 
     {
         if(PhotonNetwork.IsMasterClient)
@@ -42,6 +46,8 @@ public class cshControllerMulti : MonoBehaviourPunCallbacks
                 // the host.
             }
         }
+
+        shootingAudioSource = GameObject.FindGameObjectWithTag("shootingSound").GetComponent<AudioSource>();
     }
 
     void Awake() 
@@ -53,7 +59,7 @@ public class cshControllerMulti : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (pv.IsMine) 
+        if (CanMove && pv.IsMine) 
         {
             PlayerMove();
 
@@ -97,9 +103,22 @@ public class cshControllerMulti : MonoBehaviourPunCallbacks
         return distance <= shootingDistance;
     }
 
+    public void DisableMovementForSeconds(float seconds)
+    {
+        StartCoroutine(DisableMovementCoroutine(seconds));
+    }
+
+    private IEnumerator DisableMovementCoroutine(float seconds)
+    {
+        CanMove = false;
+        yield return new WaitForSeconds(seconds);
+        CanMove = true;
+    }
+
     [PunRPC]
     void ShootBallRPC()
     {
+        shootingAudioSource.Play();
         Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         if(ballRb != null)
         {
