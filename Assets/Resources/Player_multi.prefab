@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 4716763131644069911}
   m_Layer: 0
   m_Name: Player_multi
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   shootingPower: 0.5
   shootingDistance: 1.5
   blueMaterial: {fileID: 2100000, guid: 3f82426c064eb4d5f9de147215d1ff8b, type: 2}
+  shootingAudioSource: {fileID: 8252118675117221211, guid: 0f51e9936a96d4758877e1fc7e194ae6, type: 3}
 --- !u!54 &269865093748659650
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -9,15 +9,21 @@ public class cshController : MonoBehaviour
     public float shootingPower = 0.5f; // And this
     public float shootingDistance = 2f; // 슈팅 가능 거리
 
+    public bool CanMove { get; set; } = true;  // Add this line
+
+    public AudioSource shootingAudioSource;
 
     void Update()
     {
-        PlayerMove();
-
-        // Add this block
-        if(Input.GetKeyDown(KeyCode.Space) && IsBallInRange())
+        if (CanMove)
         {
-            ShootBall();
+            PlayerMove();
+
+            // Add this block
+            if(Input.GetKeyDown(KeyCode.Space) && IsBallInRange())
+            {
+                ShootBall();
+            }
         }
     }
 
@@ -40,6 +46,7 @@ public class cshController : MonoBehaviour
         Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         if(ballRb != null)
         {
+            shootingAudioSource.Play();
             Vector3 shootingDirection = transform.forward;
             ballRb.AddForce(shootingDirection * shootingPower, ForceMode.Impulse);
         }
@@ -49,6 +56,18 @@ public class cshController : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, ball.transform.position);
         return distance <= shootingDistance;
+    }
+
+    public void DisableMovementForSeconds(float seconds)
+    {
+        StartCoroutine(DisableMovementCoroutine(seconds));
+    }
+
+    private IEnumerator DisableMovementCoroutine(float seconds)
+    {
+        CanMove = false;
+        yield return new WaitForSeconds(seconds);
+        CanMove = true;
     }
 
 }
