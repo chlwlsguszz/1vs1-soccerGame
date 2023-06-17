@@ -12,6 +12,7 @@ public class cshGoalDetection : MonoBehaviour
     public GameObject ball;
     public Text redscoreText; // UI Text 컴포넌트를 가리키는 변수
     public Text yelloscoreText; // UI Text 컴포넌트를 가리키는 변수
+
     private int redScore = 0; // 빨간색 점수
     private int yellowScore = 0; // 노란색 점수
 
@@ -24,6 +25,8 @@ public class cshGoalDetection : MonoBehaviour
 
     public AudioSource whistleAudioSource;
     public AudioSource goalAudioSource;
+
+    public Text gameInfoText;
    
 
     private void Start()
@@ -35,6 +38,19 @@ public class cshGoalDetection : MonoBehaviour
         player1.GetComponent<cshController>().DisableMovementForSeconds(3.0f);
         player2.GetComponent<cshController2>().DisableMovementForSeconds(3.0f);
         Invoke("WhistlePlay", 3f);
+
+        StartCoroutine(StartGameText());
+    }
+
+    IEnumerator StartGameText()
+    {
+        gameInfoText.text = "3";
+        yield return new WaitForSeconds(1);
+        gameInfoText.text = "2";
+        yield return new WaitForSeconds(1);
+        gameInfoText.text = "1";
+        yield return new WaitForSeconds(1);
+        gameInfoText.text = "";
     }
 
     public void GetRedScore(int mount)
@@ -72,6 +88,7 @@ public class cshGoalDetection : MonoBehaviour
     private void EndGame(string winningTeam) 
     {    
         Debug.Log(winningTeam + " 이 게임에 승리 하였습니다 ! ! ! 5 초후 게임을 종료합니다.");
+        gameInfoText.text = winningTeam + " Win!";
         // TODO : 화면에 띄우기.
         // 1초 후에 Second 씬을 로드합니다.
         Invoke("LoadSecondScene", 5f);
@@ -91,6 +108,7 @@ public class cshGoalDetection : MonoBehaviour
         {
             goalAudioSource.Play();
             Debug.Log("!! Red Team Goal !! !");
+            gameInfoText.text = "Goal!";
             // TODO : 화면에 띄우기.
             GetRedScore(1);
             Invoke("ResetGame", 5f);
@@ -105,6 +123,7 @@ public class cshGoalDetection : MonoBehaviour
         {
             goalAudioSource.Play();
             Debug.Log("!! Yello Team Goal !! !");
+            gameInfoText.text = "Goal!";
             // TODO: 화면에 띄우기.
            // transform.position = initialPosition; // 위치 초기화
             GetYelloScore(1);
@@ -135,6 +154,7 @@ public class cshGoalDetection : MonoBehaviour
         player1.GetComponent<cshController>().DisableMovementForSeconds(3.0f);
         player2.GetComponent<cshController2>().DisableMovementForSeconds(3.0f);
         Invoke("WhistlePlay", 3f);
+        StartCoroutine(StartGameText());
 
         stopFlag = false;
     }
