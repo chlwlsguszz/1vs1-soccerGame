@@ -9,14 +9,19 @@ public class cshController2 : MonoBehaviour
    public float shootingPower = 0.5f; // 슈팅 파워
    public float shootingDistance = 2f; // 슈팅 가능 거리
 
+   public bool CanMove { get; set; } = true;  // Add this line
+
     void Update()
     {
-        PlayerMove();
-
-        // Add this block
-        if(Input.GetKeyDown(KeyCode.RightShift) && IsBallInRange())
+        if(CanMove)
         {
-            ShootBall();
+            PlayerMove();
+
+            // Add this block
+            if(Input.GetKeyDown(KeyCode.RightShift) && IsBallInRange())
+            {
+                ShootBall();
+            }
         }
     }
 
@@ -49,5 +54,17 @@ public class cshController2 : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, ball.transform.position);
         return distance <= shootingDistance;
+    }
+
+    public void DisableMovementForSeconds(float seconds)
+    {
+        StartCoroutine(DisableMovementCoroutine(seconds));
+    }
+
+    private IEnumerator DisableMovementCoroutine(float seconds)
+    {
+        CanMove = false;
+        yield return new WaitForSeconds(seconds);
+        CanMove = true;
     }
 }
