@@ -11,13 +11,16 @@
 
 
 ## 📲 주요 기능
-1. player 1 
+
+- player 1 
 ->  w a s d 키로 이동 
--> space 바로 슈팅 
-2 . player 2 
+-> space 바로 슈팅
+   
+- player 2 
 -> 방향키로 이동
 -> right shift 키로 슈팅
-3. 유니티 애니메이션 활용
+
+- 유니티 애니메이션 활용
 <br />
 
 ## 📺 게임 화면
